@@ -34,3 +34,12 @@ jobs:
         with:
           name: fetch_yaml
           path: release/fetch_yaml
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: "fetch_yaml Release ${{ github.run_id }}"
+          tag_name: "release-${{ github.run_id }}"
+          files: release/fetch_yaml
+        env:
+          GITHUB_TOKEN: ${{ secrets.YAML_PUSH_TOKEN }}
