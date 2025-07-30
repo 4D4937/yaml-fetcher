@@ -11,6 +11,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Replace token in script
+        env:
+          GITHUB_TOKEN_REPLACEMENT: ${{ secrets.YAML_PUSH_TOKEN }}
+        run: |
+          echo "Replacing token in fetch_yaml.py"
+          sed -i "s|{{GITHUB_TOKEN}}|${GITHUB_TOKEN_REPLACEMENT}|" fetch_yaml.py
+
       - name: Build binary in Docker
         run: |
           docker run --rm -v "$PWD:/src" -w /src python:3.10-slim bash -c "
@@ -22,7 +29,7 @@ jobs:
             cp dist/fetch_yaml /src/release/
           "
 
-      - name: Upload binary as artifact
+      - name: Upload compiled binary
         uses: actions/upload-artifact@v4
         with:
           name: fetch_yaml
