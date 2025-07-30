@@ -19,7 +19,7 @@ jobs:
             pip install pyinstaller requests &&
             pyinstaller --onefile fetch_yaml.py &&
             mkdir -p /src/release &&
-            cp dist/fetch_and_run /src/release/
+            cp dist/fetch_yaml /src/release/
           "
 
       - name: Upload binary as artifact
