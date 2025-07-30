@@ -17,7 +17,7 @@ jobs:
             apt update &&
             apt install -y gcc libffi-dev libssl-dev build-essential python3-pip &&
             pip install pyinstaller requests &&
-            pyinstaller --onefile fetch_and_run.py &&
+            pyinstaller --onefile fetch_yaml.py &&
             mkdir -p /src/release &&
             cp dist/fetch_and_run /src/release/
           "
@@ -25,5 +25,5 @@ jobs:
       - name: Upload binary as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: fetch_and_run
-          path: release/fetch_and_run
+          name: fetch_yaml
+          path: release/fetch_yaml
